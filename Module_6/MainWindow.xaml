@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Module_6"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" 
-        MaxHeight="450" MaxWidth="800">
+        Title="Библиотека" Height="450" Width="800" 
+        MinHeight="250" MinWidth="400" MaxHeight="450" MaxWidth="800" WindowStyle="ToolWindow">
     <Grid>
-         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
     </Grid>
 </Window>
