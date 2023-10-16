@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Module_6"
         mc:Ignorable="d"
         Title="Библиотека" Height="450" Width="800" 
-        MinHeight="250" MinWidth="400" MaxHeight="450" MaxWidth="800" WindowStyle="ToolWindow">
+        MinHeight="250" MinWidth="600" MaxHeight="450" MaxWidth="800" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Background="#019391">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -15,9 +15,84 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#00DFC3"/>
+            </Rectangle.Fill>
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#00606C " Direction="315" ShadowDepth="5" BlurRadius="30" Opacity="0.5"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Grid.Row="3" Grid.Column="0" Grid.RowSpan="1">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FF0BC6AF"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button Grid.Row="0" Content="Добавить" FontFamily="Arial Bold" Height="50" Width="130" Click="Button_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="#00C3FF" CornerRadius="15">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Button.Effect>
+                <DropShadowEffect Color="#00606C " Direction="315" ShadowDepth="5" BlurRadius="15" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Foreground>
+                <SolidColorBrush Color="White" />
+            </Button.Foreground>
+        </Button>
+        <Button Grid.Row="1" Content="Вывести" FontFamily="Arial Bold" Height="50" Width="130">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="#00C3FF" CornerRadius="15">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Button.Effect>
+                <DropShadowEffect Color="#00606C " Direction="315" ShadowDepth="5" BlurRadius="15" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Foreground>
+                <SolidColorBrush Color="White" />
+            </Button.Foreground>
+        </Button>
+        <Button Grid.Row="2" Content="Аренда" FontFamily="Arial Bold" Height="50" Width="130">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="DarkBlue" CornerRadius="15">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Button.Effect>
+                <DropShadowEffect Color="#00606C " Direction="315" ShadowDepth="5" BlurRadius="15" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Foreground>
+                <SolidColorBrush Color="White" />
+            </Button.Foreground>
+        </Button>
     </Grid>
 </Window>
