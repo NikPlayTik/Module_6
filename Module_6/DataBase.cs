@@ -25,23 +25,27 @@ namespace Module_6
                 sqlConnection.Close();
             }
         }
-        public void AddBook(string authorName, string bookName, int yearRelease)
+        public int AddBook(string authorName, string bookName, int yearRelease)
         {
+            int bookId = -1; // Идентификатор (ID) по умолчанию
             try
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Books (author_Name_Surname, nameBook, yearRelease) VALUES (@author, @name, @year)", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Books (author_Name_Surname, nameBook, yearRelease) OUTPUT INSERTED.id_books VALUES (@author, @name, @year)", sqlConnection))
                 {
                     cmd.Parameters.AddWithValue("@author", authorName);
                     cmd.Parameters.AddWithValue("@name", bookName);
                     cmd.Parameters.AddWithValue("@year", yearRelease);
                     sqlConnection.Open();
-                    cmd.ExecuteNonQuery();
+                    // Используем ExecuteScalar для получения ID после вставки
+                    bookId = (int)cmd.ExecuteScalar();
                 }
             }
             finally
             {
                 closeConnection();
             }
+
+            return bookId; // Возвращаем ID
         }
         public List<string> GetBooks()
         {
@@ -64,6 +68,39 @@ namespace Module_6
                 closeConnection();
             }
             return books;
+        }
+
+        public bool RentBook(int id_books, DateTime rentedDate)
+        {
+            try
+            {
+                openConnection();
+
+                // Проверяем, арендована ли книга. Если да, то не арендуем снова.
+                using (SqlCommand checkCmd = new SqlCommand("SELECT RentedDate FROM Books WHERE Id = @id_books", sqlConnection))
+                {
+                    checkCmd.Parameters.AddWithValue("@id_books", id_books);
+                    var existingRentedDate = checkCmd.ExecuteScalar();
+                    if (existingRentedDate != DBNull.Value)
+                    {
+                        return false; // Книга уже арендована
+                    }
+                }
+
+                // Если книга еще не арендована, арендуем её.
+                using (SqlCommand rentCmd = new SqlCommand("UPDATE Books SET RentedDate = @rentedDate WHERE Id = @id_books", sqlConnection))
+                {
+                    rentCmd.Parameters.AddWithValue("@id_books", id_books);
+                    rentCmd.Parameters.AddWithValue("@rentedDate", rentedDate);
+
+                    rentCmd.ExecuteNonQuery();
+                    return true; // Книга успешно арендована
+                }
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
     }
 }
