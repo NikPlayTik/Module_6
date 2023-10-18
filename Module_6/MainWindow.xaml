@@ -19,7 +19,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Rectangle Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <Rectangle.Fill>
                 <SolidColorBrush Color="#00DFC3"/>
@@ -36,7 +36,8 @@
                 <DropShadowEffect Color="#00606C " Direction="315" ShadowDepth="5" BlurRadius="30" Opacity="0.5"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Button Grid.Row="0" Content="Добавить" FontFamily="Arial Bold" Height="30" Width="130" Click="Button_Click">
+        
+        <Button Name="Кнопка_Добавить" Grid.Row="0" Content="Добавить" FontFamily="Arial Bold" Height="30" Width="130" Click="AddButton_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -57,7 +58,7 @@
                 <SolidColorBrush Color="White" />
             </Button.Foreground>
         </Button>
-        <Button Grid.Row="2" Content="Вывести" FontFamily="Arial Bold" Height="30" Width="130">
+        <Button Name="Кнопка_Вывести" Grid.Row="2" Content="Вывести" FontFamily="Arial Bold" Height="30" Width="130" Click="OutputButton_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -79,8 +80,15 @@
             </Button.Foreground>
         </Button>
 
-        <TextBox Name="ФИО" Grid.Column="1" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните ФИО автора" Width="170" MinWidth="100" Height="30" Background="#4CFFFFFF" BorderThickness="0" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
-        <TextBox Name="Название" Grid.Column="2" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните название книги" Width="170" Height="30" Background="#4CFFFFFF" BorderThickness="0" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
-        <TextBox Name="Год_выпуска" Grid.Column="3" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните год выпуска" Width="170" Height="30" Background="#4CFFFFFF" BorderThickness="0" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
+        <TextBox Name="ФИО" Grid.Column="1" FontFamily="Arial Bold" FontSize="20" TextWrapping="Wrap" Width="170" MinWidth="100" Height="30" Background="#4CFFFFFF" BorderThickness="1" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
+        <TextBlock Name="ФИО_Текст" Grid.Column="1" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните ФИО автора" HorizontalAlignment="Center" Margin="5"/>
+
+        <TextBox Name="Название" Grid.Column="2" FontFamily="Arial Bold" FontSize="20" TextWrapping="Wrap" Width="170" Height="30" Background="#4CFFFFFF" BorderThickness="1" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
+        <TextBlock Name="Название_книги_Текст" Grid.Column="2" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните название книги" HorizontalAlignment="Center" Margin="5"/>
+
+        <TextBox Name="Год_выпуска" Grid.Column="3" FontFamily="Arial Bold" FontSize="20" TextWrapping="Wrap" Width="170" Height="30" Background="#4CFFFFFF" BorderThickness="1" Foreground="Aqua" SelectionBrush="AntiqueWhite"/>
+        <TextBlock Name="Год_выпуска_Текст" Grid.Column="3" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните год выпуска" HorizontalAlignment="Center" Margin="5"/>
+
+        <ListView Name="View_information" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="20" Foreground="Black" Width="550" Height="330" Background="#4CFFFFFF" BorderBrush="#FFA8B6DF" />
     </Grid>
 </Window>
