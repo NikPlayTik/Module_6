@@ -25,27 +25,23 @@ namespace Module_6
                 sqlConnection.Close();
             }
         }
-        public int AddBook(string authorName, string bookName, int yearRelease)
+        public void AddBook(string authorName, string bookName, int yearRelease)
         {
-            int bookId = -1; // Идентификатор (ID) по умолчанию
             try
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Books (author_Name_Surname, nameBook, yearRelease) OUTPUT INSERTED.id_books VALUES (@author, @name, @year)", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Books (author_Name_Surname, nameBook, yearRelease) VALUES (@author, @name, @year)", sqlConnection))
                 {
                     cmd.Parameters.AddWithValue("@author", authorName);
                     cmd.Parameters.AddWithValue("@name", bookName);
                     cmd.Parameters.AddWithValue("@year", yearRelease);
                     sqlConnection.Open();
-                    // Используем ExecuteScalar для получения ID после вставки
-                    bookId = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
                 }
             }
             finally
             {
                 closeConnection();
             }
-
-            return bookId; // Возвращаем ID
         }
         public List<string> GetBooks()
         {
