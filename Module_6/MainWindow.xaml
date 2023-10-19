@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Module_6"
         mc:Ignorable="d"
         Title="Библиотека" Height="450" Width="800" 
-        MinHeight="300" MinWidth="700" MaxHeight="450" MaxWidth="800" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Background="#019391">
+        MinHeight="300" MinWidth="700" MaxHeight="450" MaxWidth="800" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Background="#019391" Icon="Иконка.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
