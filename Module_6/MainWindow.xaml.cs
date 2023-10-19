@@ -54,7 +54,6 @@ namespace Module_6
             }
         }
 
-
         private void OutputButton_Click(object sender, RoutedEventArgs e)
         {
             List<string> books = database.GetBooks();

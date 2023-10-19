@@ -9,7 +9,7 @@ namespace Module_6
 {
     public class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data source=DESKTOP-VM99VUJ;Initial Catalog=Books;Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data source=DESKTOP-VM99VUJ;Initial Catalog=BooksData;Integrated Security=True");
 
         public void openConnection()
         {
@@ -29,7 +29,7 @@ namespace Module_6
         {
             try
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Books (author_Name_Surname, nameBook, yearRelease) VALUES (@author, @name, @year)", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO BooksData (author_Name_Surname, nameBook, yearRelease) VALUES (@author, @name, @year)", sqlConnection))
                 {
                     cmd.Parameters.AddWithValue("@author", authorName);
                     cmd.Parameters.AddWithValue("@name", bookName);
@@ -48,7 +48,7 @@ namespace Module_6
             List<string> books = new List<string>();
             try
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT author_Name_Surname, nameBook, yearRelease FROM Books", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("SELECT author_Name_Surname, nameBook, yearRelease FROM BooksData", sqlConnection))
                 {
                     openConnection();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -73,7 +73,7 @@ namespace Module_6
                 openConnection();
 
                 // Проверяем, арендована ли книга. Если да, то не арендуем снова.
-                using (SqlCommand checkCmd = new SqlCommand("SELECT RentedDate FROM Books WHERE Id = @id_books", sqlConnection))
+                using (SqlCommand checkCmd = new SqlCommand("SELECT RentedDate FROM BooksData WHERE Id = @id_books", sqlConnection))
                 {
                     checkCmd.Parameters.AddWithValue("@id_books", id_books);
                     var existingRentedDate = checkCmd.ExecuteScalar();
@@ -84,7 +84,7 @@ namespace Module_6
                 }
 
                 // Если книга еще не арендована, арендуем её.
-                using (SqlCommand rentCmd = new SqlCommand("UPDATE Books SET RentedDate = @rentedDate WHERE Id = @id_books", sqlConnection))
+                using (SqlCommand rentCmd = new SqlCommand("UPDATE BooksData SET RentedDate = @rentedDate WHERE Id = @id_books", sqlConnection))
                 {
                     rentCmd.Parameters.AddWithValue("@id_books", id_books);
                     rentCmd.Parameters.AddWithValue("@rentedDate", rentedDate);
