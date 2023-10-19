@@ -9,7 +9,7 @@ namespace Module_6
 {
     public class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data source=DESKTOP-VM99VUJ;Initial Catalog=BooksData;Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data source=DESKTOP-VM99VUJ;Initial Catalog=BooksData1;Integrated Security=True");
 
         public void openConnection()
         {
@@ -25,15 +25,16 @@ namespace Module_6
                 sqlConnection.Close();
             }
         }
-        public void AddBook(string authorName, string bookName, int yearRelease)
+        public void AddBook(string authorName, string bookName, int yearRelease, bool Rented)
         {
             try
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO BooksData (author_Name_Surname, nameBook, yearRelease) VALUES (@author, @name, @year)", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO BooksData1 (author_Name_Surname, nameBook, yearRelease, Rented) VALUES (@author, @name, @year, @rented)", sqlConnection))
                 {
                     cmd.Parameters.AddWithValue("@author", authorName);
                     cmd.Parameters.AddWithValue("@name", bookName);
                     cmd.Parameters.AddWithValue("@year", yearRelease);
+                    cmd.Parameters.AddWithValue("@rented", Rented);
                     sqlConnection.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -48,7 +49,7 @@ namespace Module_6
             List<string> books = new List<string>();
             try
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT author_Name_Surname, nameBook, yearRelease FROM BooksData", sqlConnection))
+                using (SqlCommand cmd = new SqlCommand("SELECT author_Name_Surname, nameBook, yearRelease FROM BooksData1", sqlConnection))
                 {
                     openConnection();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -64,39 +65,6 @@ namespace Module_6
                 closeConnection();
             }
             return books;
-        }
-
-        public bool RentBook(int id_books, DateTime rentedDate)
-        {
-            try
-            {
-                openConnection();
-
-                // Проверяем, арендована ли книга. Если да, то не арендуем снова.
-                using (SqlCommand checkCmd = new SqlCommand("SELECT RentedDate FROM BooksData WHERE Id = @id_books", sqlConnection))
-                {
-                    checkCmd.Parameters.AddWithValue("@id_books", id_books);
-                    var existingRentedDate = checkCmd.ExecuteScalar();
-                    if (existingRentedDate != DBNull.Value)
-                    {
-                        return false; // Книга уже арендована
-                    }
-                }
-
-                // Если книга еще не арендована, арендуем её.
-                using (SqlCommand rentCmd = new SqlCommand("UPDATE BooksData SET RentedDate = @rentedDate WHERE Id = @id_books", sqlConnection))
-                {
-                    rentCmd.Parameters.AddWithValue("@id_books", id_books);
-                    rentCmd.Parameters.AddWithValue("@rentedDate", rentedDate);
-
-                    rentCmd.ExecuteNonQuery();
-                    return true; // Книга успешно арендована
-                }
-            }
-            finally
-            {
-                closeConnection();
-            }
         }
     }
 }

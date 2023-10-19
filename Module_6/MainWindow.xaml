@@ -90,11 +90,8 @@
         <TextBlock Name="Год_выпуска_Текст" Grid.Column="3" FontFamily="Arial Bold" TextWrapping="Wrap" Text="Заполните год выпуска" HorizontalAlignment="Center" Margin="5"/>
 
         <ListView Name="View_information" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="20" Foreground="Black" Width="550" Height="330" Background="#4CFFFFFF" BorderBrush="#FFA8B6DF">
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Арендовать" Click="RentMenuItem_Click" />
-                </ContextMenu>
-            </ListView.ContextMenu>
+            <CheckBox Name="RentCheckBox" Content="Арендовано" Margin="390,10"/>
         </ListView>
+        
     </Grid>
 </Window>
